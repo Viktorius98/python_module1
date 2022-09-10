@@ -1,16 +1,28 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Ввод количества билетов и сообщение о скидке, если человек регистрирует четыре и более человек на конференцию
+tickets = int(input("Приобретая 4-ре и более билетов скидка 10% от совокупной стоимости билетов.\n"
+# \n - перенос строки                    
+                    "Введите количество билетов, которое хотите приобрести:"))
+# Ввод возраста владельца каждого из билетов
+age = list(map(int, input("Укажите через запятую возраст посетителей: ").split(',')))
+# Проверка, что количество билетов равно кол-ву введенных значений возраста покупателя, если несовпадает, повторный ввод
+while tickets != len(age):
+    age = list(map(int, input("Количество посетителей не совпадает с количеством билетов.\n"
+# \n - перенос строки                  
+                              "Укажите через запятую возраст посетителей: ").split(',')))
+# Создание списка для расчета стоимости билетов с учетом возраста посетителей
+price = []
+for i in age:
+# Для возраста до 17 лет
+    if i in range(0, 18):
+        price.append(0)
+# Для возраста от 18 до 24 лет
+    elif i in range(18, 25):
+        price.append(990)
+# Иначе от 25 лет и более - цена 1390 рублей
+    else:
+        price.append(1390)
+# Если купили 4 и более билетов, то выводится сумма с учетом скидки 10%,
+if tickets > 3:
+    print("Сумма с учетом скидки: ", sum(price) - ((sum(price) / 100) * 10), "рублей")
+else:
+    print("Сумма к оплате: ", sum(price), "рублей")
