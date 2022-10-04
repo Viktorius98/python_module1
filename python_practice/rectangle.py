@@ -10,9 +10,3 @@ class Square:
     def get_area_square(self):
         return self.a ** 2
 # возведение в степень **2 (в квадрат)
-class NonPositiveDigitException(ValueError):
-    pass
-class Square:
-    def __init__(self, a):
-        if a < 0:
-            raise NonPositiveDigitException('Неправильно указанна сторона квадрата')
