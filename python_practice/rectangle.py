@@ -12,8 +12,6 @@ class Square:
 # возведение в степень **2 (в квадрат)
 class NonPositiveDigitException(ValueError):
     pass
-
-
 class Square:
     def __init__(self, a):
         if a < 0:
