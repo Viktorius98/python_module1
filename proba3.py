@@ -40,12 +40,13 @@ node_5 = node_root.right_child.insert_right(9)
 node_9 = node_5.right_child.insert_left(4)
 
 
-def pre_order(self):
-    print(self.value)  # процедура обработки
-    if self.left_child is not None:  # если левый потомок существует
-        self.left_child.pre_order()  # рекурсивно вызываем функцию
-    if self.right_child is not None:  # если правый потомок существует
-        self.right_child.pre_order()  # рекурсивно вызываем функцию
+def post_order(self):
+    if self.left_child is not None: # если левый потомок существует
+        self.left_child.post_order() # рекурсивно вызываем функцию
 
+    if self.right_child is not None: # если правый потомок существует
+        self.right_child.post_order() # рекурсивно вызываем функцию
+
+    print(self.value) # процедура обработки
 
 node_root.post_order()
