@@ -1,21 +1,23 @@
-import random
+def binary_search(array_1, some_number, left, right):
 
-# random.choice(array[idx_left: idx_right])
-def qsort_random(array, left, right):
-    p = random.choice(array[left:right + 1])
-    i, j = left, right
-    while i <= j:
-        while array[i] < p:
-            i += 1
-        while array[j] > p:
-            j -= 1
-        if i <= j:
-            count += 1
-            array[i], array[j] = array[j], array[i]
-            i += 1
-            j -= 1
+    if left > right:
+        return False
 
-    if j > left:
-        qsort_random(array, left, j)
-    if right > i:
-        qsort_random(array, i, right)
+    middle = (right+left) // 2
+    if array_1[middle] < some_number and array_1[middle + 1] >= some_number:
+        return middle
+    elif some_number < array_1[middle]:
+        return binary_search(array_1, some_number, left, middle-1)
+    else:
+        return binary_search(array_1, some_number, middle+1, right)
+
+some_number = int(input())
+array_1 = [i for i in range(0, len(array_1)-1)]
+
+print(binary_search(array_1, some_number, 0, len(array_1) - 1))
+
+
+
+
+some_number = int(input())
+array_1 = [i for i in range(0, len(array_1)-1)]

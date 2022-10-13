@@ -35,7 +35,6 @@ def binary_search(array_1, some_number, left, right):
     else:
         return binary_search(array_1, some_number, middle+1, right)
 
-some_number = int(input())
-array_1 = [i for i in range(0, len(array_1)-1)]
+print(array_1)
 
 print(binary_search(array_1, some_number, 0, len(array_1) - 1))
