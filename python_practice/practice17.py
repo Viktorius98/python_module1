@@ -1,40 +1,17 @@
-array = list(map(int, input('Введите любую последовательность чисел через пробел: ').split()))
-some_number = int(input('Введите любое число: '))
+import requests # импортируем наш знакомый модуль
+import lxml.html
+from lxml import etree
 
-while some_number:
-    if some_number <= min(array):
-        print('Введенное число не соответствует критериям поиска, введите число не превышающее максимальное значение и'
-              'больше минимального')
-        some_number = int(input('Введите любое число: '))
-    elif some_number > max(array):
-        print('Введенное число не соответствует критериям поиска, введите число не превышающее максимальное значение и'
-              'больше минимального')
-        some_number = int(input('Введите любое число: '))
-    else:
-        break
 
-def buble(array):
-    for i in range(len(array)):
-        for j in range(len(array)-i-1):
-            if array[j] > array[j+1]:
-                array[j], array[j+1] = array[j+1], array[j]
-    return array
+html = requests.get('https://www.python.org/').content # получим html главной странички официального сайта python
 
-array_1 = buble(array)
+# создадим объект ElementTree. Он возвращается функцией parse()
+tree = etree.parse('Welcome to Python.org.html', lxml.html.HTMLParser()) # попытаемся спарсить наш файл с помощью html парсера
 
-def binary_search(array_1, some_number, left, right):
+ul = tree.findall('body/div/div[3]/div/section/div[3]/div[1]/div/ul/li') # помещаем в аргумент методу findall скопированный xpath
 
-    if left > right:
-        return False
-
-    middle = (right+left) // 2
-    if array_1[middle] < some_number and array_1[middle + 1] >= some_number:
-        return middle
-    elif some_number < array_1[middle]:
-        return binary_search(array_1, some_number, left, middle-1)
-    else:
-        return binary_search(array_1, some_number, middle+1, right)
-
-print(array_1)
-
-print(binary_search(array_1, some_number, 0, len(array_1) - 1))
+# создаём цикл в котором мы будем выводить название каждого элемента из списка
+for li in ul:
+    a = li.find('a') # в каждом элементе находим где хранится название. У нас это тег <a>
+    time = li.find('time')
+    print(time.get('datetime'), a.text) # из этого тега забираем текст - это и будет нашим названием
