@@ -1,7 +1,8 @@
 import telebot
 
-TOKEN = "5716164818:AAEq0mi2V4irNlU4ldTgw55AaEgWvmFy0sk"
+bot = telebot.TeleBot("TOKEN")
+@bot.message_handler(commands=['start', 'help'])
+def send_welcome(message):
+    bot.send_message(message.chat.id, f"Welcome, \ c{message.chat.username}")
 
-bot = telebot.TeleBot(TOKEN)
-
-bot.polling(none_stop=True)
+    bot.polling(none_stop=True)
