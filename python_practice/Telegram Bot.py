@@ -4,7 +4,7 @@ from keyboards import start_buttons
 from parser import get_coin_list, get_pair
 
 
-bot = telebot.TeleBot(token())
+bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands=['start','help'])
 def start(message):
